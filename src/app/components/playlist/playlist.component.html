@@ -1,21 +1,9 @@
 <div *ngIf="playlistService.hasPlaylist && playlistService.playlist">
   <button mat-button (click)="stopPlaying()">stop</button>
-
-  <mat-form-field>
-    <mat-select [(value)]="streamURL">
-      <mat-option *ngFor="let channel of playlistService.playlist.segments" value="{{channel.url}}">
-        <img class="avatar" src="{{channel.inf.tvgLogo}}" />
-        {{channel.inf.title}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <p>You streamURL: {{streamURL}}</p>
-
-  <!-- <button mat-button *ngFor="let channel of playlistService.playlist.segments" (click)="playStream(channel.url)">
+  <button mat-button *ngFor="let channel of playlistService.playlist.segments" (click)="playStream(channel.url)">
     <img class="avatar" src="{{channel.inf.tvgLogo}}" />
     {{channel.inf.title}}
-  </button> -->
+  </button>
 </div>
 
 <div id="load-url" *ngIf="!playlistService.hasPlaylist">
