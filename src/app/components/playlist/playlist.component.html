@@ -1,0 +1,29 @@
+<div *ngIf="playlistService.hasPlaylist && playlistService.playlist">
+  <button mat-button (click)="stopPlaying()">stop</button>
+
+  <mat-form-field>
+    <mat-select [(value)]="streamURL">
+      <mat-option *ngFor="let channel of playlistService.playlist.segments" value="{{channel.url}}">
+        <img class="avatar" src="{{channel.inf.tvgLogo}}" />
+        {{channel.inf.title}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <p>You streamURL: {{streamURL}}</p>
+
+  <!-- <button mat-button *ngFor="let channel of playlistService.playlist.segments" (click)="playStream(channel.url)">
+    <img class="avatar" src="{{channel.inf.tvgLogo}}" />
+    {{channel.inf.title}}
+  </button> -->
+</div>
+
+<div id="load-url" *ngIf="!playlistService.hasPlaylist">
+  <mat-form-field appearance="standard">
+    <mat-label>Playlist URL</mat-label>
+    <input matInput placeholder="http://i.mjh.nz/nzau/kodi-tv.m3u8" [formControl]="playlistURLControl">
+  </mat-form-field>
+  <button mat-button color="primary" (click)="loadPlaylist()">Load</button>
+</div>
+
+<d-player *ngIf="streamURL" #player dpHls [video]="{url: streamURL}"></d-player>
