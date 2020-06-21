@@ -26,7 +26,10 @@ export class PlaylistComponent implements OnInit {
   }
 
   playStream(streamURL: string) {
-    this.streamURL = streamURL.split("|")[0];
+    this.stopPlaying();
+    setTimeout(()=> {
+      this.streamURL = streamURL.split("|")[0];
+    }, 500);
   }
 
   stopPlaying() {
