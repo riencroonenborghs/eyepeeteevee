@@ -1,9 +1,14 @@
 <template>
   <div id="app">
     <Toolbar></Toolbar>
-    <flex-row>
-      <LoadM3u8 v-on:m3u8Data="onM3u8Data($event)"></LoadM3u8>
-      <Channels v-bind:m3u8Data="m3u8Data" v-on:play="onPlay($event)"></Channels>
+    <flex-col>
+      <LoadM3u8 v-on:m3u8Data="onM3u8Data($event)" v-on:channels="onChannels($event)"></LoadM3u8>
+      <Channels v-if="m3u8Data.segments" v-bind:m3u8Data="m3u8Data" v-on:play="onPlay($event)"></Channels>
+      <CountryChannels v-if="channels.length > 0" v-bind:channels="channels" v-on:play="onPlay($event)"></CountryChannels>
+    </flex-col>
+    <flex-row align-h="center" id="iptv-channels">
+      <a href="https://github.com/iptv-org/iptv" target="_blank">Github IPTV</a>
+      <a href="https://iptvcat.com/" target="_blank">IPTV Cat</a>
     </flex-row>
 
     <md-dialog :md-active.sync="showDialog" :md-close-on-esc="false" :md-click-outside-to-close="false">
@@ -19,11 +24,13 @@
 import Toolbar from "./components/Toolbar.vue";
 import LoadM3u8 from "./components/LoadM3u8.vue";
 import Channels from "./components/Channels.vue";
+import CountryChannels from "./components/CountryChannels.vue";
 
 export default {
   name: "App",
   data: () => ({
     m3u8Data: {},
+    channels: [],
     playerOptions: null,
     showDialog: false
   }),
@@ -31,11 +38,14 @@ export default {
     onM3u8Data: function(m3u8Data) {
       this.m3u8Data = m3u8Data;
     },
-    onPlay: function(segment) {
+    onChannels: function(channels) {
+      this.channels = channels;
+    },
+    onPlay: function(url) {
       this.showDialog = true;
       this.playerOptions = {
         video: {
-          url: segment.url
+          url: url
         },
         autoplay: true
       }
@@ -49,10 +59,15 @@ export default {
   components: {
     Toolbar,
     LoadM3u8,
-    Channels
+    Channels,
+    CountryChannels
   }
 }
 </script>
 
-<style>
+<style scoped>
+  #iptv-channels a {
+    text-decoration: none;
+    padding: 4px;
+  }
 </style>

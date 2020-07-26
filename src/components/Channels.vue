@@ -13,17 +13,18 @@
 
 <script>
 export default {
-  name: "Toolbar",
+  name: "Channels",
   props: ["m3u8Data"],
   methods: {
     play: function(segment) {
-      this.$emit("play", segment);
+      this.$emit("play", segment.url);
     }
   }
 }
 </script>
 
 <style>
+#channels { padding: 16px; }
 #channels .md-button { height: initial; }
 #channels .md-avatar { margin: 4px; }
 #channels .md-avatar img { width: initial; }
