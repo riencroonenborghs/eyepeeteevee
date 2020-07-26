@@ -5,7 +5,7 @@ export class M3u8Service {
     this.httpClient = httpClient;
   }
 
-  load(url) {
+  loadURL(url) {
     return new Promise((resolve, reject) => {
       this.httpClient.get(url).then(
         (data) => {
@@ -18,6 +18,17 @@ export class M3u8Service {
           reject(error);
         }
       );
+    });
+  }
+
+  loadFile(file) {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = e => {
+        let m3u8Data = this._parseData(e.target.result);
+        resolve(m3u8Data);
+      }
+      reader.readAsText(file);
     });
   }
   

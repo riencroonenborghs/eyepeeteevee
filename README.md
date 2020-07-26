@@ -1,24 +1,7 @@
-# eyepeeteevee-vue
+# eyepeeteevee
 
-## Project setup
-```
-npm install
-```
+Watch IPTV channels.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## How?
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Load a m3u8 file that contains a list of channels. Click a channel you want to watch.
