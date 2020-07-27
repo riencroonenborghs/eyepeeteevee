@@ -1,11 +1,27 @@
 <template>
   <div id="app">
     <Toolbar></Toolbar>
+
+    <md-tabs class="md-transparent">
+      <md-tab id="tab-url" md-icon="link">
+        <LoadByURL v-on:loaded="onLoadM3u8Data($event)"></LoadByURL>
+      </md-tab>
+      <md-tab id="tab-file" md-icon="attach_file">
+        <LoadByUploadedFile v-on:loaded="onLoadM3u8Data($event)"></LoadByUploadedFile>
+      </md-tab>
+      <md-tab id="tab-countries" md-icon="flag">
+        <LoadByCountries v-on:loaded="onLoadChannels($event)"></LoadByCountries>
+      </md-tab>
+      <md-tab id="tab-languages" md-icon="language">
+        <LoadByLanguages v-on:loaded="onLoadChannels($event)"></LoadByLanguages>
+      </md-tab>
+    </md-tabs>
+
     <flex-col>
-      <LoadM3u8 v-on:m3u8Data="onM3u8Data($event)" v-on:channels="onChannels($event)"></LoadM3u8>
       <Channels v-if="m3u8Data.segments" v-bind:m3u8Data="m3u8Data" v-on:play="onPlay($event)"></Channels>
       <CountryChannels v-if="channels.length > 0" v-bind:channels="channels" v-on:play="onPlay($event)"></CountryChannels>
     </flex-col>
+
     <flex-row align-h="center" id="iptv-channels">
       <a href="https://github.com/iptv-org/iptv" target="_blank">Github IPTV</a>
       <a href="https://iptvcat.com/" target="_blank">IPTV Cat</a>
@@ -22,9 +38,13 @@
 
 <script>
 import Toolbar from "./components/Toolbar.vue";
-import LoadM3u8 from "./components/LoadM3u8.vue";
+import LoadByURL from "./components/load/LoadByURL.vue";
+import LoadByUploadedFile from "./components/load/LoadByUploadedFile.vue";
+import LoadByCountries from "./components/load/LoadByCountries.vue";
+import LoadByLanguages from "./components/load/LoadByLanguages.vue";
 import Channels from "./components/Channels.vue";
 import CountryChannels from "./components/CountryChannels.vue";
+
 
 export default {
   name: "App",
@@ -35,11 +55,13 @@ export default {
     showDialog: false
   }),
   methods: {
-    onM3u8Data: function(m3u8Data) {
+    onLoadM3u8Data: function(m3u8Data) {
       this.m3u8Data = m3u8Data;
+      this.channels = [];
     },
-    onChannels: function(channels) {
+    onLoadChannels: function(channels) {
       this.channels = channels;
+      this.m3u8Data = {};
     },
     onPlay: function(url) {
       this.showDialog = true;
@@ -58,9 +80,8 @@ export default {
   },
   components: {
     Toolbar,
-    LoadM3u8,
-    Channels,
-    CountryChannels
+    LoadByURL, LoadByUploadedFile, LoadByCountries, LoadByLanguages,
+    Channels, CountryChannels
   }
 }
 </script>
