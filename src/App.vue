@@ -18,8 +18,8 @@
     </md-tabs>
 
     <flex-col>
-      <Channels v-if="m3u8Data.segments" v-bind:m3u8Data="m3u8Data" v-on:play="onPlay($event)"></Channels>
-      <CountryChannels v-if="channels.length > 0" v-bind:channels="channels" v-on:play="onPlay($event)"></CountryChannels>
+      <ChannelsBySegments v-if="m3u8Data.segments" v-bind:m3u8Data="m3u8Data" v-on:play="onPlay($event)"></ChannelsBySegments>
+      <ChannelsByChannels v-if="channels.length > 0" v-bind:channels="channels" v-on:play="onPlay($event)"></ChannelsByChannels>
     </flex-col>
 
     <flex-row align-h="center" id="iptv-channels">
@@ -42,9 +42,8 @@ import LoadByURL from "./components/load/LoadByURL.vue";
 import LoadByUploadedFile from "./components/load/LoadByUploadedFile.vue";
 import LoadByCountries from "./components/load/LoadByCountries.vue";
 import LoadByLanguages from "./components/load/LoadByLanguages.vue";
-import Channels from "./components/Channels.vue";
-import CountryChannels from "./components/CountryChannels.vue";
-
+import ChannelsBySegments from "./components/channels/ChannelsBySegments.vue";
+import ChannelsByChannels from "./components/channels/ChannelsByChannels.vue";
 
 export default {
   name: "App",
@@ -81,7 +80,7 @@ export default {
   components: {
     Toolbar,
     LoadByURL, LoadByUploadedFile, LoadByCountries, LoadByLanguages,
-    Channels, CountryChannels
+    ChannelsBySegments, ChannelsByChannels
   }
 }
 </script>

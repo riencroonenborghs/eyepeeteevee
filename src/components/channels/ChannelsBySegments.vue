@@ -1,5 +1,5 @@
 <template>
-  <div id="channels">
+  <div id="channels-by-segments">
     <md-button v-for="segment in m3u8Data.segments" :key="segment.tvgId" v-on:click="play(segment)">
       <flex-row noWrap align-v="center">
         <md-avatar>
@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: "Channels",
+  name: "ChannelsBySegments",
   props: ["m3u8Data"],
   methods: {
     play: function(segment) {
@@ -24,8 +24,8 @@ export default {
 </script>
 
 <style>
-#channels { padding: 16px; }
-#channels .md-button { height: initial; }
-#channels .md-avatar { margin: 4px; }
-#channels .md-avatar img { width: initial; }
+#channels-by-segments { padding: 16px; }
+#channels-by-segments .md-button { height: initial; }
+#channels-by-segments .md-avatar { margin: 4px; }
+#channels-by-segments .md-avatar img { width: initial; }
 </style>
