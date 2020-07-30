@@ -28,13 +28,11 @@ export default {
     }
   },
   mounted() {
-    console.log("LoadCountries mounted -- 1");
     this.$store.channelsService.load().then(
       () => {
         this.countries = this.$store.channelsService.countries();
       }
     );
-    console.log("LoadCountries mounted -- 2");
   }
 }
 </script>

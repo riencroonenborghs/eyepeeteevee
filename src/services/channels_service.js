@@ -14,12 +14,7 @@ export class ChannelsService {
       if(this._data == null) {
         this.httpClient.get(this.url).then(
           (data) => {
-            this._data = this._toChannels(data.body);
-            let index = 0;
-            this._data.forEach((item) => {
-              item.id = index;
-              index += 1;
-            });
+            this._data = this._toChannels(data.body);            
             resolve(this._data);
           },
           (error) => {
@@ -79,7 +74,10 @@ export class ChannelsService {
   }
 
   _toChannels(list) {
+    let index = 0;
     return list.map((data) => {
+      data.id = index;
+      index += 1;
       return Object.assign(
         new Channel(),
         data

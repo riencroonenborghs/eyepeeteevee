@@ -27,14 +27,12 @@ export default {
       this.$emit("loaded", channels);
     }
   },
-  created() {
-    console.log("LoadLanguage mounted -- 1");
+  mounted() {
     this.$store.channelsService.load().then(
       () => {
         this.languages = this.$store.channelsService.languages();
       }
     );
-    console.log("LoadLanguage mounted -- 1");
   }
 }
 </script>
