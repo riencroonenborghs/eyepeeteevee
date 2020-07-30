@@ -1,4 +1,5 @@
 import Vue from "vue";
+import Vuex from "vuex";
 
 import { MdToolbar, MdField, MdButton, MdAvatar, MdDialog, MdMenu, MdList, MdTabs } from "vue-material/dist/components";
 import "vue-material/dist/vue-material.min.css";
@@ -13,6 +14,7 @@ import VueBetterDPlayer from "vue-better-dplayer";
 
 import App from "./App.vue";
 
+Vue.use(Vuex);
 Vue.use(MdToolbar);
 Vue.use(MdField);
 Vue.use(MdButton);
@@ -26,6 +28,19 @@ Vue.use(VueResource);
 Vue.use(VueBetterDPlayer);
 Vue.config.productionTip = false;
 
+import { ChannelsService } from "./services/ChannelsService";
+
+const store = new Vuex.Store({
+  state: {
+    channelsService: null
+  }
+})
+
 new Vue({
+  store,
   render: h => h(App),
+  created() {
+    this.$store.channelsService = new ChannelsService(this.$http);
+    // this.$store.channelsService.load().then();
+  }
 }).$mount("#app");

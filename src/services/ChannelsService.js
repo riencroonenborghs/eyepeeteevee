@@ -9,22 +9,26 @@ export class ChannelsService {
 
   load() {
     return new Promise((resolve, reject) => {
-      this.httpClient.get(this.url).then(
-        (data) => {
-          this._data = data.body;
-          let index = 0;
-          this._data.forEach((item) => {
-            item.id = index;
-            index += 1;
-          });
-          resolve(this._data);
-        },
-        (error) => {
-          console.error("ERROR");
-          console.error(error);
-          reject(error);
-        }
-      );
+      if(this._data == null) {
+        this.httpClient.get(this.url).then(
+          (data) => {
+            this._data = data.body;
+            let index = 0;
+            this._data.forEach((item) => {
+              item.id = index;
+              index += 1;
+            });
+            resolve(this._data);
+          },
+          (error) => {
+            console.error("ERROR");
+            console.error(error);
+            reject(error);
+          }
+        );
+      } else {
+        resolve(this._data);
+      }
     });
   }
 

@@ -15,28 +15,26 @@
 </template>
 
 <script>
-import { ChannelsService } from "../../services/ChannelsService";
-
 export default {
   name: "LoadByCountries",
   data: () => ({
-    channelsService: null,
     countries: [],
     country: null
   }),
   methods: {
     selected: function() {
-      let channels = this.channelsService.findCountry(this.country);
+      let channels = this.$store.channelsService.findCountry(this.country);
       this.$emit("loaded", channels);
     }
   },
   mounted() {
-    this.channelsService = new ChannelsService(this.$http);
-    this.channelsService.load().then(
+    console.log("LoadByCountries mounted -- 1");
+    this.$store.channelsService.load().then(
       () => {
-        this.countries = this.channelsService.countries();
+        this.countries = this.$store.channelsService.countries();
       }
     );
+    console.log("LoadByCountries mounted -- 2");
   }
 }
 </script>
