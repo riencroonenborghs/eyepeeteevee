@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { M3u8Service } from "@/services/M3u8Service";
+import { M3u8Service } from "@/services/m3u8_service";
 
 export default {
   name: "LoadURL",

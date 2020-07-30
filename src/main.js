@@ -28,7 +28,7 @@ Vue.use(VueResource);
 Vue.use(VueBetterDPlayer);
 Vue.config.productionTip = false;
 
-import { ChannelsService } from "./services/ChannelsService";
+import { ChannelsService } from "@/services/channels_service";
 
 const store = new Vuex.Store({
   state: {
