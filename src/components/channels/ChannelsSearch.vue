@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: "ChannelSearch",
+  name: "ChannelsSearch",
   props: ["channels"],
   data: () => ({
     query: null

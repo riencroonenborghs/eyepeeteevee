@@ -1,4 +1,5 @@
 import * as m3u8FileParser from "m3u8-file-parser";
+import { Channel } from "../models/channel";
 
 export class M3u8Service {
   constructor(httpClient) {
@@ -10,7 +11,7 @@ export class M3u8Service {
       this.httpClient.get(url).then(
         (data) => {
           let m3u8Data = this._parseData(data.body);
-          resolve(m3u8Data);
+          resolve(this._toChannels(m3u8Data));
         },
         (error) => {
           console.error("ERROR");
@@ -26,7 +27,7 @@ export class M3u8Service {
       const reader = new FileReader();
       reader.onload = e => {
         let m3u8Data = this._parseData(e.target.result);
-        resolve(m3u8Data);
+        resolve(this._toChannels(m3u8Data));
       }
       reader.readAsText(file);
     });
@@ -42,5 +43,14 @@ export class M3u8Service {
       segment.urlAdditional = parts[1];
     });
     return parsedData;
+  }
+
+  _toChannels(m3u8Data) {
+    return m3u8Data.segments.map((data) => {
+      return Object.assign(
+        new Channel(),
+        {id: data.inf.tvgId, logo: data.inf.tvgLogo, name: data.inf.title, url: data.url}
+      );
+    });
   }
 }

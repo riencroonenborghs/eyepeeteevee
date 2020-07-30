@@ -1,5 +1,5 @@
 <template>
-  <div id="load-by-uploaded-file">
+  <div id="load-file">
     <form novalidate>
       <flex-row noWrap align-v="center" id="file">
         <md-field>
@@ -15,7 +15,7 @@
 import { M3u8Service } from "../../services/M3u8Service";
 
 export default {
-  name: "LoadByUploadedFile",
+  name: "LoadFile",
   methods: {    
     load: function($event) {
       let file = $event[0];
@@ -31,7 +31,7 @@ export default {
 </script>
 
 <style>
-#load-by-uploaded-file { 
+#load-file { 
   width: 600px;
   padding: 16px;
 }

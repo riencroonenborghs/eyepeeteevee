@@ -1,5 +1,5 @@
 <template>
-  <div id="load-by-languages">
+  <div id="load-languages">
     <form novalidate>
       <flex-row noWrap align-v="center" id="languages">
         <md-field>
@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: "LoadByLanguage",
+  name: "LoadLanguage",
   data: () => ({
     languages: [],
     language: null
@@ -28,23 +28,23 @@ export default {
     }
   },
   created() {
-    console.log("LoadByLanguage mounted -- 1");
+    console.log("LoadLanguage mounted -- 1");
     this.$store.channelsService.load().then(
       () => {
         this.languages = this.$store.channelsService.languages();
       }
     );
-    console.log("LoadByLanguage mounted -- 1");
+    console.log("LoadLanguage mounted -- 1");
   }
 }
 </script>
 
 <style>
-#load-by-languages { 
+#load-languages { 
   width: 600px;
   padding: 16px;
 }
-#load-by-languages #languages .md-menu.md-select {
+#load-languages #languages .md-menu.md-select {
   padding-left: 12px;
 }
 

@@ -1,3 +1,5 @@
+import { Channel } from "../models/channel";
+
 export class ChannelsService {
   constructor(httpClient) {
     this.httpClient = httpClient;
@@ -12,7 +14,7 @@ export class ChannelsService {
       if(this._data == null) {
         this.httpClient.get(this.url).then(
           (data) => {
-            this._data = data.body;
+            this._data = this._toChannels(data.body);
             let index = 0;
             this._data.forEach((item) => {
               item.id = index;
@@ -74,6 +76,15 @@ export class ChannelsService {
     }
 
     return this._languages[language];
+  }
+
+  _toChannels(list) {
+    return list.map((data) => {
+      return Object.assign(
+        new Channel(),
+        data
+      );
+    });
   }
   
 }

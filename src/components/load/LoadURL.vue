@@ -1,5 +1,5 @@
 <template>
-  <div id="load-by-url">
+  <div id="load-url">
     <form novalidate>
       <flex-row noWrap align-v="center" id="url">
         <md-field>
@@ -17,7 +17,7 @@
 import { M3u8Service } from "../../services/M3u8Service";
 
 export default {
-  name: "LoadByURL",
+  name: "LoadURL",
   data: () => ({
     url: "http://i.mjh.nz/nzau/kodi-tv.m3u8"
   }),
@@ -35,11 +35,11 @@ export default {
 </script>
 
 <style>
-#load-by-url { 
+#load-url { 
   width: 600px;
   padding: 16px;
 }
-#load-by-url #url md-field {
+#load-url #url md-field {
   width: 450px;
 }
 </style>

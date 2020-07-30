@@ -5,18 +5,18 @@
       <a v-if="!search" href="#" v-on:click="showSearch()">search</a>
       <a v-if="search" href="#" v-on:click="hideSearch()">hide search</a>
     </div>
-    <ChannelSearch v-show="search" v-bind:channels="channels" v-on:searched="onSearched($event)"></ChannelSearch>
+    <ChannelsSearch v-show="search" v-bind:channels="channels" v-on:searched="onSearched($event)"></ChannelsSearch>
     <Channel v-if="!searched" v-bind:channels="channels" v-on:playURL="onPlayURL($event)"></Channel>
     <Channel v-if="searched" v-bind:channels="searchedChannels" v-on:playURL="onPlayURL($event)"></Channel>
   </div>
 </template>
 
 <script>
-import ChannelSearch from "./ChannelSearch.vue";
+import ChannelsSearch from "./ChannelsSearch.vue";
 import Channel from "./Channel.vue";
 
 export default {
-  name: "ChannelsByChannels",
+  name: "Channels",
   props: ["channels"],
   data: () => ({
     search: false,
@@ -39,7 +39,7 @@ export default {
     }
   },
   components: {
-    ChannelSearch, Channel
+    ChannelsSearch, Channel
   }
 }
 </script>

@@ -4,22 +4,21 @@
 
     <md-tabs class="md-transparent">
       <md-tab id="tab-url" md-icon="link">
-        <LoadByURL v-on:loaded="onLoadM3u8Data($event)"></LoadByURL>
+        <LoadURL v-on:loaded="onLoadChannels($event)"></LoadURL>
       </md-tab>
       <md-tab id="tab-file" md-icon="attach_file">
-        <LoadByUploadedFile v-on:loaded="onLoadM3u8Data($event)"></LoadByUploadedFile>
+        <LoadFile v-on:loaded="onLoadChannels($event)"></LoadFile>
       </md-tab>
       <md-tab id="tab-countries" md-icon="flag">
-        <LoadByCountries v-on:loaded="onLoadChannels($event)"></LoadByCountries>
+        <LoadCountries v-on:loaded="onLoadChannels($event)"></LoadCountries>
       </md-tab>
       <md-tab id="tab-languages" md-icon="language">
-        <LoadByLanguages v-on:loaded="onLoadChannels($event)"></LoadByLanguages>
+        <LoadLanguages v-on:loaded="onLoadChannels($event)"></LoadLanguages>
       </md-tab>
     </md-tabs>
 
     <flex-col>
-      <ChannelsBySegments v-if="m3u8Data.segments" v-bind:m3u8Data="m3u8Data" v-on:play="onPlay($event)"></ChannelsBySegments>
-      <ChannelsByChannels v-if="channels.length > 0" v-bind:channels="channels" v-on:play="onPlay($event)"></ChannelsByChannels>
+      <Channels v-if="channels.length > 0" v-bind:channels="channels" v-on:play="onPlay($event)"></Channels>
     </flex-col>
 
     <flex-row align-h="center" id="iptv-channels">
@@ -38,29 +37,22 @@
 
 <script>
 import Toolbar from "./components/Toolbar.vue";
-import LoadByURL from "./components/load/LoadByURL.vue";
-import LoadByUploadedFile from "./components/load/LoadByUploadedFile.vue";
-import LoadByCountries from "./components/load/LoadByCountries.vue";
-import LoadByLanguages from "./components/load/LoadByLanguages.vue";
-import ChannelsBySegments from "./components/channels/ChannelsBySegments.vue";
-import ChannelsByChannels from "./components/channels/ChannelsByChannels.vue";
+import LoadURL from "./components/load/LoadURL.vue";
+import LoadFile from "./components/load/LoadFile.vue";
+import LoadCountries from "./components/load/LoadCountries.vue";
+import LoadLanguages from "./components/load/LoadLanguages.vue";
+import Channels from "./components/channels/Channels.vue";
 
 export default {
   name: "App",
   data: () => ({
-    m3u8Data: {},
     channels: [],
     playerOptions: null,
     showDialog: false
   }),
   methods: {
-    onLoadM3u8Data: function(m3u8Data) {
-      this.m3u8Data = m3u8Data;
-      this.channels = [];
-    },
     onLoadChannels: function(channels) {
       this.channels = channels;
-      this.m3u8Data = {};
     },
     onPlay: function(url) {
       this.showDialog = true;
@@ -79,8 +71,8 @@ export default {
   },
   components: {
     Toolbar,
-    LoadByURL, LoadByUploadedFile, LoadByCountries, LoadByLanguages,
-    ChannelsBySegments, ChannelsByChannels
+    LoadURL, LoadFile, LoadCountries, LoadLanguages,
+    Channels
   }
 }
 </script>

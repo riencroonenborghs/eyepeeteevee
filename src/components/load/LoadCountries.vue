@@ -1,5 +1,5 @@
 <template>
-  <div id="load-by-countries">
+  <div id="load-countries">
     <form novalidate>
       <flex-row noWrap align-v="center" id="countries">
         <md-field>
@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: "LoadByCountries",
+  name: "LoadCountries",
   data: () => ({
     countries: [],
     country: null
@@ -28,23 +28,23 @@ export default {
     }
   },
   mounted() {
-    console.log("LoadByCountries mounted -- 1");
+    console.log("LoadCountries mounted -- 1");
     this.$store.channelsService.load().then(
       () => {
         this.countries = this.$store.channelsService.countries();
       }
     );
-    console.log("LoadByCountries mounted -- 2");
+    console.log("LoadCountries mounted -- 2");
   }
 }
 </script>
 
 <style>
-#load-by-countries { 
+#load-countries { 
   width: 600px;
   padding: 16px;
 }
-#load-by-countries #countries .md-menu.md-select {
+#load-countries #countries .md-menu.md-select {
   padding-left: 12px;
 }
 
