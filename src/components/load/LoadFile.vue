@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { M3u8Service } from "../../services/M3u8Service";
+import { M3u8Service } from "@/services/M3u8Service";
 
 export default {
   name: "LoadFile",

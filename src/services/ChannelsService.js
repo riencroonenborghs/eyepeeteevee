@@ -1,4 +1,4 @@
-import { Channel } from "../models/channel";
+import { Channel } from "@/models/channel";
 
 export class ChannelsService {
   constructor(httpClient) {

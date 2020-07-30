@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import ChannelsSearch from "./ChannelsSearch.vue";
-import Channel from "./Channel.vue";
+import ChannelsSearch from "@/components/channels/ChannelsSearch.vue";
+import Channel from "@/components/channels/Channel.vue";
 
 export default {
   name: "Channels",

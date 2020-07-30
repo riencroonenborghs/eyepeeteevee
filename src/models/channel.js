@@ -1,6 +1,6 @@
-import { Country } from "./country";
-import { Language } from "./language";
-import { Tvg } from "./tvg";
+import { Country } from "@/models/country";
+import { Language } from "@/models/language";
+import { Tvg } from "@/models/tvg";
 
 export class Channel {
   get id() { return this._id; }

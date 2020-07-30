@@ -1,5 +1,5 @@
 import * as m3u8FileParser from "m3u8-file-parser";
-import { Channel } from "../models/channel";
+import { Channel } from "@/models/channel";
 
 export class M3u8Service {
   constructor(httpClient) {
