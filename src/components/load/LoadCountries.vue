@@ -2,13 +2,10 @@
   <div id="load-countries">
     <form novalidate>
       <flex-row noWrap align-v="center" id="countries">
-        <md-field>
-          <md-icon>flag</md-icon>
-          <label for="country">Country</label>
-          <md-select v-model="country" name="country" id="country" @md-selected="selected()">
-            <md-option v-for="country in countries"  :key="country" :value="country">{{country}}</md-option>
-          </md-select>
-        </md-field>
+        <md-icon>flag</md-icon>
+        <md-autocomplete v-model="country" @md-selected="selected()" :md-options="countries">
+          <label>Country</label>
+        </md-autocomplete>
       </flex-row>
     </form>
   </div>
@@ -19,7 +16,7 @@ export default {
   name: "LoadCountries",
   data: () => ({
     countries: [],
-    country: null
+    country: null,
   }),
   methods: {
     selected: function() {
@@ -42,15 +39,5 @@ export default {
   width: 600px;
   padding: 16px;
 }
-#load-countries #countries .md-menu.md-select {
-  padding-left: 12px;
-}
-
-.md-menu-content {
-  min-width: initial;
-  max-width: initial;
-}
-.md-menu-content.md-select-menu {
-  width: 600px;
-}
+#load-countries #countries .md-icon { margin-right: 16px; }
 </style>

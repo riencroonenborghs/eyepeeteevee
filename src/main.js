@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
-import { MdToolbar, MdField, MdButton, MdAvatar, MdDialog, MdMenu, MdList, MdTabs } from "vue-material/dist/components";
+import { MdToolbar, MdField, MdButton, MdAvatar, MdDialog, MdMenu, MdList, MdTabs, MdAutocomplete } from "vue-material/dist/components";
 import "vue-material/dist/vue-material.min.css";
 import "vue-material/dist/theme/default-dark.css";
 
@@ -23,6 +23,7 @@ Vue.use(MdDialog);
 Vue.use(MdMenu);
 Vue.use(MdList);
 Vue.use(MdTabs);
+Vue.use(MdAutocomplete);
 Vue.use(VueFlex);
 Vue.use(VueResource);
 Vue.use(VueBetterDPlayer);

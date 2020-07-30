@@ -2,13 +2,10 @@
   <div id="load-languages">
     <form novalidate>
       <flex-row noWrap align-v="center" id="languages">
-        <md-field>
-          <md-icon>language</md-icon>
-          <label for="country">Language</label>
-          <md-select v-model="language" name="language" id="language" @md-selected="selected()">
-            <md-option v-for="language in languages"  :key="language" :value="language">{{language}}</md-option>
-          </md-select>
-        </md-field>
+        <md-icon>language</md-icon>
+        <md-autocomplete v-model="language" @md-selected="selected()" :md-options="languages">
+          <label>Language</label>
+        </md-autocomplete>
       </flex-row>
     </form>
   </div>
@@ -42,15 +39,5 @@ export default {
   width: 600px;
   padding: 16px;
 }
-#load-languages #languages .md-menu.md-select {
-  padding-left: 12px;
-}
-
-.md-menu-content {
-  min-width: initial;
-  max-width: initial;
-}
-.md-menu-content.md-select-menu {
-  width: 600px;
-}
+#load-languages #languages .md-icon { margin-right: 16px; }
 </style>

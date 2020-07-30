@@ -21,8 +21,8 @@ export default {
       let file = $event[0];
       let service = new M3u8Service();
       service.loadFile(file).then(
-        (m3u8Data) => {
-          this.$emit("loaded", m3u8Data);
+        (channels) => {
+          this.$emit("loaded", channels);
         }
       );
     }
