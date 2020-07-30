@@ -26,7 +26,13 @@
       <a href="https://iptvcat.com/" target="_blank">IPTV Cat</a>
     </flex-row>
 
-    <md-dialog :md-active.sync="showDialog" :md-close-on-esc="false" :md-click-outside-to-close="false">
+    <md-dialog v-if="channel != null" :md-active.sync="showDialog" :md-close-on-esc="false" :md-click-outside-to-close="false">
+      <md-dialog-title>
+        <md-avatar>
+          <img :src="channel.logo" :alt="channel.name">
+        </md-avatar>
+        {{channel.name}}
+      </md-dialog-title>
       <vue-better-dplayer  v-if="playerOptions" :options="playerOptions" ref="player"></vue-better-dplayer>
       <md-dialog-actions>
         <md-button class="md-primary" @click="stopPlaying()">Close</md-button>
@@ -48,22 +54,26 @@ export default {
   data: () => ({
     channels: [],
     playerOptions: null,
+    channel: null,
     showDialog: false
   }),
   methods: {
     onLoadChannels: function(channels) {
       this.channels = channels;
     },
-    onPlay: function(url) {
-      this.showDialog = true;
+    onPlay: function(channel) {
+      this.channel = channel;
+      console.log(channel);
       this.playerOptions = {
         video: {
-          url: url
+          url: channel.url
         },
         autoplay: true
       }
+      this.showDialog = true;
     },
     stopPlaying: function() {
+      this.channel = null;
       this.showDialog = false;
       this.$refs.player.dplayer.destroy();
       this.playerOptions = null;

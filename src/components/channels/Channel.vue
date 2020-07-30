@@ -17,7 +17,7 @@ export default {
   props: ["channels"],
   methods: {
     playChannel: function(channel) {
-      this.$emit("playURL", channel.url);
+      this.$emit("playURL", channel);
     }
   }
 }

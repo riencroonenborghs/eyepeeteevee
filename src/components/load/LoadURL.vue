@@ -26,7 +26,6 @@ export default {
       let service = new M3u8Service(this.$http);
       service.loadURL(this.url).then(
         (channels) => {
-          console.log(channels);
           this.$emit("loaded", channels);
         }
       );
