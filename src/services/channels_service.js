@@ -63,19 +63,19 @@ export class ChannelsService {
   }
 
   findCountry(country) {
-    if(Object.keys(this._countries) == 0) {
-      this.countries();
-    }
-
-    return this._countries[country];
+    return this._findBy("countries", country);
   }
 
   findLanguage(language) {
-    if(Object.keys(this._languages) == 0) {
-      this.languages();
-    }
+    return this._findBy("languages", language);
+  }
 
-    return this._languages[language];
+  _findBy(key, value) {
+    let list = this[`_${key}`];
+    if(Object.keys(list) == 0) {
+      this[key]();
+    }
+    return list[value];
   }
 
   _toChannels(list) {
@@ -86,5 +86,4 @@ export class ChannelsService {
       );
     });
   }
-  
 }
