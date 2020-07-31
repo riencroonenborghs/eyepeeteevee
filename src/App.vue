@@ -28,10 +28,17 @@
 
     <md-dialog v-if="channel != null" :md-active.sync="showDialog" :md-close-on-esc="false" :md-click-outside-to-close="false">
       <md-dialog-title>
-        <md-avatar>
-          <img :src="channel.logo" :alt="channel.name">
-        </md-avatar>
-        {{channel.name}}
+        <flex-row align-h="between">
+          <div>
+            <md-avatar>
+              <img :src="channel.logo" :alt="channel.name">
+            </md-avatar>
+            {{channel.name}}
+          </div>
+          <md-button class="md-icon-button" @click="stopPlaying()">
+            <md-icon>close</md-icon>
+          </md-button>
+        </flex-row>
       </md-dialog-title>
       <vue-better-dplayer  v-if="playerOptions" :options="playerOptions" ref="player"></vue-better-dplayer>
       <md-dialog-actions>
