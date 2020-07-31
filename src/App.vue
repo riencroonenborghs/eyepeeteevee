@@ -9,6 +9,9 @@
       <md-tab id="tab-languages" md-icon="language">
         <LoadLanguages v-on:loaded="onLoadChannels($event)"></LoadLanguages>
       </md-tab>
+      <md-tab id="tab-categories" md-icon="category">
+        <LoadCategories v-on:loaded="onLoadChannels($event)"></LoadCategories>
+      </md-tab>
       <md-tab id="tab-url" md-icon="link">
         <LoadURL v-on:loaded="onLoadChannels($event)"></LoadURL>
       </md-tab>
@@ -54,6 +57,7 @@ import LoadURL from "./components/load/LoadURL.vue";
 import LoadFile from "./components/load/LoadFile.vue";
 import LoadCountries from "./components/load/LoadCountries.vue";
 import LoadLanguages from "./components/load/LoadLanguages.vue";
+import LoadCategories from "./components/load/LoadCategories.vue";
 import Channels from "./components/channels/Channels.vue";
 
 export default {
@@ -88,7 +92,7 @@ export default {
   },
   components: {
     Toolbar,
-    LoadURL, LoadFile, LoadCountries, LoadLanguages,
+    LoadURL, LoadFile, LoadCountries, LoadLanguages, LoadCategories,
     Channels
   }
 }

@@ -7,6 +7,7 @@ export class ChannelsService extends LoadService {
     this.url = "https://iptv-org.github.io/iptv/channels.json";    
     this._countries = {};
     this._languages = {};
+    this._categories = {};
     this._parsed = false;
   }
 
@@ -43,12 +44,29 @@ export class ChannelsService extends LoadService {
     return Object.keys(this._languages).sort();
   }
 
+  categories() {
+    if(this._empty(this._categories)) {
+      this._data.forEach((item) => {
+        if(this._notIn(this._categories, () => item.category)) {
+          this._categories[item.category] = []
+        }
+        this._categories[item.category].push(item);
+      });
+    }
+
+    return Object.keys(this._categories).sort();
+  }
+
   findCountry(country) {
     return this._findBy("countries", country);
   }
 
   findLanguage(language) {
     return this._findBy("languages", language);
+  }
+
+  findCategory(category) {
+    return this._findBy("categories", category);
   }
 
   _empty(list) {
