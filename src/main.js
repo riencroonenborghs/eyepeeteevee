@@ -42,6 +42,5 @@ new Vue({
   render: h => h(App),
   created() {
     this.$store.channelsService = new ChannelsService(this.$http);
-    // this.$store.channelsService.load().then();
   }
 }).$mount("#app");

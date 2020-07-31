@@ -1,38 +1,24 @@
+import { LoadService } from "@/services/load_service";
 import { Channel } from "@/models/channel";
 
-export class ChannelsService {
+export class ChannelsService extends LoadService {
   constructor(httpClient) {
-    this.httpClient = httpClient;
-    this.url = "https://iptv-org.github.io/iptv/channels.json";
-    this._data = null;
+    super(httpClient);
+    this.url = "https://iptv-org.github.io/iptv/channels.json";    
     this._countries = {};
     this._languages = {};
+    this._parsed = false;
   }
 
-  load() {
-    return new Promise((resolve, reject) => {
-      if(this._data == null) {
-        this.httpClient.get(this.url).then(
-          (data) => {
-            this._data = this._toChannels(data.body);            
-            resolve(this._data);
-          },
-          (error) => {
-            console.error("ERROR");
-            console.error(error);
-            reject(error);
-          }
-        );
-      } else {
-        resolve(this._data);
-      }
-    });
+  async load() {
+    await this.loadURL(this.url);
+    if(!this._parsed) { this._parseData(); }
   }
 
   countries() {
-    if(Object.keys(this._countries).length == 0) {
+    if(this._empty(this._countries)) {
       this._data.forEach((item) => {
-        if(Object.keys(this._countries).indexOf(item.country.name) == -1) {
+        if(this._notIn(this._countries, () => item.country.name)) {
           this._countries[item.country.name] = []
         }
         this._countries[item.country.name].push(item);
@@ -43,10 +29,10 @@ export class ChannelsService {
   }
 
   languages() {
-    if(Object.keys(this._languages).length == 0) {
+    if(this._empty(this._languages)) {
       this._data.forEach((item) => {
         item.language.forEach((language) => {
-          if(Object.keys(this._languages).indexOf(language.name) == -1) {
+          if(this._notIn(this._languages, () => language.name)) {
             this._languages[language.name] = []
           }
           this._languages[language.name].push(item);
@@ -65,6 +51,14 @@ export class ChannelsService {
     return this._findBy("languages", language);
   }
 
+  _empty(list) {
+    return Object.keys(list).length == 0;
+  }
+
+  _notIn(list, indexF) {
+    return Object.keys(list).indexOf(indexF()) == -1;
+  }
+
   _findBy(key, value) {
     let list = this[`_${key}`];
     if(Object.keys(list) == 0) {
@@ -73,9 +67,9 @@ export class ChannelsService {
     return list[value];
   }
 
-  _toChannels(list) {
+  _parseData() {
     let index = 0;
-    return list.map((data) => {
+    this._data = this._data.map((data) => {
       data.id = index;
       index += 1;
       return Object.assign(
@@ -83,5 +77,6 @@ export class ChannelsService {
         data
       );
     });
+    this._parsed = true;
   }
 }
