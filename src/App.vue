@@ -12,7 +12,7 @@
       <md-tab id="tab-categories" md-icon="category">
         <LoadCategories v-on:loaded="onLoadChannels($event)"></LoadCategories>
       </md-tab>
-      <md-tab id="tab-url" md-icon="link">
+      <md-tab id="tab-url" md-icon="link" v-if="urlEnabled">
         <LoadURL v-on:loaded="onLoadChannels($event)"></LoadURL>
       </md-tab>
       <md-tab id="tab-file" md-icon="attach_file">
@@ -66,7 +66,8 @@ export default {
     channels: [],
     playerOptions: null,
     channel: null,
-    showDialog: false
+    showDialog: false,
+    urlEnabled: false
   }),
   methods: {
     onLoadChannels: function(channels) {
@@ -74,7 +75,6 @@ export default {
     },
     onPlay: function(channel) {
       this.channel = channel;
-      console.log(channel);
       this.playerOptions = {
         video: {
           url: channel.url
